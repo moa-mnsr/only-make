@@ -1,0 +1,152 @@
+<html>
+  
+  <head>
+    <title>PROMPTS</title>
+    
+    <link rel="stylesheet" href="/style.css">
+    
+    
+  </head>
+  <body>
+<center>
+    <h1>
+      YOUR PROMPT:
+    </h1>
+  
+    
+    
+    <br><br>
+    
+    <i><div id="generator"></div></i>
+<br><br><br>
+      
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfpYPB4BLI3pmWyQ1qjJ6JRgbxR5I9at4xLMlpqoIlcEXriZA/viewform" target="_blank">add a prompt</a>
+  
+  
+    
+    
+    <br><br><br>
+    
+  
+   
+    
+  
+  <!--begin sheetrock test-->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sheetrock/1.1.4/dist/sheetrock.min.js"></script>
+
+  
+  <table id="all-prompts" class="table table-condensed table-striped"></table>
+
+  
+  <script>
+  var mySpreadsheet = 'https://docs.google.com/spreadsheets/d/1WaqFex5Y8fT936NQfnJK1YT_8kJGw3MZENnH_KIOchU/edit#gid=0';
+ 
+  // var daniel = {
+  //   age: 31, race: 'white'
+  // };
+
+    // Load Prompts
+$('#all-prompts').sheetrock({
+  url: mySpreadsheet,
+  query: "select B",
+  callback: function(error, options, response) {
+    console.log(response)
+
+    
+    var rows = response.raw.table.rows;
+    console.log(rows)
+    
+   $.each([response.rows.c], function(index, value) {
+     //prompts.push(v)
+     console.log(response.rows.c) 
+     alert(value)
+     
+});
+
+
+    //QUESTIONS
+    // i'm running a function in the iterator-- 
+      //are the parameters i want (index,value)? or just (value)? or something else?
+    // what exactly is the iterator DOING that's going to help me? if i understand correctly it is unpacking the values in the google sheet, 
+    //in a sense listing them here as though i had entered them myself manually. i'm going to need to put SOMETHING 
+    //in prompts.push(), the very set of data im trying to extract out of the iterator. but is it just a matter of finding the right name for it now,
+    //something i should already be able to figure out from the console.log (why is it not called rows.c.v.??), 
+    //or am i missing a step / do i need to unpack the matrushka twice?
+    //(but if i do, that's confusing bc i thought daniel said i only need to run the iterator once.)  
+    //or in other words, is the format for what i'm trying to do simply
+    //  $.each([rows], function(index, value) {
+     //prompts.push(VARIABLE I NEED TO NAME) or am i missing an action that needs to come first in order to be able to name that variable?
+     
+    
+    
+    // $.each([ rows ], function( index, value ) {
+    // var prompts = [];
+    //prompts.push(value)
+    //});
+    // Hints:
+    // #1: `rows` is an array
+    // #2: you will need to iterate / loop over `rows` to extract all the results
+    // #3: in your iterator / loop, you want to "append" or "push" or add items to `prompts` 
+    // #4: there is lots of "nesting" (things within things, matroshka) because
+    //     it's a flexible data structure
+    // #5: just use console.log a bunch to figure out what you're dealing with
+    // #6: make the table disappear 
+    
+    // e.raw (console) == response.raw (here)
+    
+    // var prompts = ["focus on textures", 
+    //              "zoom in", 
+    //              "zoom out", 
+    //              "make it small", 
+    //              "incorporate ghosts", 
+    //              "dress in costume and make in character", 
+    //              "make a translation"];
+    
+    var prompts = ["focus on textures", 
+                 "zoom in", 
+                 "zoom out", 
+                 "make it small", 
+                 "incorporate ghosts", 
+                 "dress in costume and make in character", 
+                 "make a translation"];
+    
+    var random = Math.floor(Math.random() * prompts.length);
+    console.log(random, prompts[random]);
+
+  
+    document.getElementById("generator").innerHTML = prompts[random];
+  
+  }
+});
+    
+    
+    // response.raw.table.rows
+
+  </script>
+  
+ <!--manual solution for random prompt--
+    
+<script>
+
+var prompts = ["focus on textures", 
+                 "zoom in", 
+                 "zoom out", 
+                 "make it small", 
+                 "incorporate ghosts", 
+                 "dress in costume and make in character", 
+                 "make a translation"];
+
+var random = Math.floor(Math.random() * prompts.length);
+console.log(random, prompts[random]);
+
+document.getElementById("generator").innerHTML = prompts[random];
+</script>
+      -->
+  
+  
+  
+    </center>
+  </body>
+</html>

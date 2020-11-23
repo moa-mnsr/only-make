@@ -1,11 +1,26 @@
-* { 
-    font-family: "Roboto"; 
+* {
+  font-family: "Roboto";
 }
 
 body {
-    background-color: #B9EEDB;
+  background-color: #B9EEDB;
+}
+
+h1 {
+  font-size: 218%;
 }
 
 .lemons {
-    width: 350px;
+  width: 350px;
+}
+
+.box {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.poster {
+  width: 150px;
 }
