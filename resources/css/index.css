@@ -6,15 +6,36 @@ body {
   background-color: #B9EEDB;
 }
 
+header {
+  text-align: center;
+  margin: auto 0;
+}
+
+main {
+  text-align: center;
+  margin: auto 0;
+}
+
 h1 {
   font-size: 218%;
 }
 
-.lemons {
-  width: 350px;
+.description {
+  text-align: center;
+  
 }
 
-.box {
+.section {
+
+}
+.lemons {
+  width: 350px;
+  
+}
+
+.posterbox {
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -23,4 +44,9 @@ h1 {
 
 .poster {
   width: 150px;
+}
+
+.currentposter {
+  width: 350px;
+  
 }
