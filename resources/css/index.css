@@ -26,6 +26,7 @@ h1 {
 }
 
 .section {
+  margin: 0 auto;
 
 }
 .lemons {
@@ -34,12 +35,17 @@ h1 {
 }
 
 .posterbox {
+  
+  padding: 5%;
+  /*
   margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  flex-wrap: wrap;
+  margin-right: auto;*/
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(160px, 1fr));
+  justify-items: left;
+  /*flex-wrap: wrap;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-evenly;*/
 }
 
 .poster {
