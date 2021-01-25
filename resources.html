@@ -3,49 +3,106 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="./resources/css/index.css" type="text/css" rel="stylesheet" />
+    <link href="style.css" type="text/css" rel="stylesheet" />
+     <link href="arena.css" type="text/css" rel="stylesheet" />
     <link
       href="https://fonts.googleapis.com/css?family=Roboto"
       rel="stylesheet"
     />
+    
     <title>only make</title>
   </head>
 
   <body>
     <header>
+     
+    
       <h1>
-        Links to Helpful Resources
+        Creative resources:
       </h1>
-      <nav>
-        <!-- <span><a href="/about.html">ABOUT</a></span>-->
-        <span>
-          <span> <a href="/index.html">HOME</a>&nbsp;&nbsp;|&nbsp;&nbsp; </span>
-          <a href="/prompts.html">PROMPTS</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-        </span>
+    
+      
+        <p>
+          A collection of creative advice and tools from our <a href="https://www.are.na/there-is-only-make" target="_blank">are.na channel</a>. Are.na is an open-source and ad-free visual organization tool designed for building collections of content. 
+          Channels like this one are collaborative; anyone can add a link, text, or photo to the channel and it will automatically appear in the list below.
+      </p>
+      <br>
+      <div id="orientation-blocks"></div>
 
-        <span><a href="mailto:moa_mnsr@protonmail.com">CONTACT</a> </span>
-      </nav>
-      <br /><br />
-    </header>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+      let orientation = [];
+      const orientationWrapper = document.getElementById("orientation-blocks");
 
-    <main>
-      <a href="/selfinterview.html">Art Self Interview</a>
-      <br /><br />
-      <em
-        >An interview from the book Art/Work; intended to be used as a tool for
-        preparing to apply for art residencies, but also just generally helpful
-        for honing in on ~what you're doing~</em
-      >
-      <br /><br />
-      <br /><br />
-      <a href="https://thecreativeindependent.com/">The Creative Independent</a>
-      <br /><br />
-      <em
-        >A growing resource of emotional and practical guidance for creative
-        people, most in the form of interviews</em
-      >
-      <br /><br />
-      <br /><br />
+      const axiosArena = axios.create({
+        baseURL: "https://api.are.na/v2/"
+      });
+
+      let loading = document.createElement("div");
+      loading.className = "loading";
+      loading.innerHTML = "loading...";
+      orientationWrapper.appendChild(loading);
+
+      axiosArena.defaults.headers.Authorization = "Bearer ---";
+      axiosArena
+        .get("channels/creative-practice-resources?per=100")
+        .then(response => {
+          console.log(response);
+          if (response.data && response.data.contents.length > 1) {
+            orientationWrapper.removeChild(loading);
+            createOrientation(response.data.contents);
+          } else {
+          }
+        });
+
+      function createOrientation(orientationData) {
+        for (let i = 0; i < orientationData.length; i++) {
+          //create block
+          let block = document.createElement("div");
+          block.className = "block";
+
+          if (orientationData[i].source) {
+            block = document.createElement("a");
+            block.className = "block";
+            block.href = orientationData[i].source.url;
+            block.target = "_blank";
+          }
+
+          if (orientationData[i].class === "Channel") {
+            block = document.createElement("a");
+            block.className = "channel";
+            block.href = `https://are.na/${orientationData[i].user.slug}/${orientationData[i].slug}`;
+            block.target = "_blank";
+          }
+
+          //create image
+          if (orientationData[i].image && orientationData[i].image) {
+            const image = document.createElement("img");
+            image.className = "image";
+            image.src = orientationData[i].image.square.url;
+            block.appendChild(image);
+          }
+          //create title
+          if (orientationData[i].title) {
+            const title = document.createElement("div");
+            title.className = "arenatitle";
+            title.innerHTML = orientationData[i].title;
+            block.appendChild(title);
+          }
+
+          //create text
+          if (orientationData[i].class === "Text") {
+            const text = document.createElement("div");
+            text.className = "text";
+            text.innerHTML = orientationData[i].content;
+            block.appendChild(text);
+          }
+
+          orientationWrapper.appendChild(block);
+        }
+      }
+    </script>
+      
     </main>
   </body>
 </html>

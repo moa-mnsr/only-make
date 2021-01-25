@@ -56,3 +56,10 @@ h1 {
   width: 350px;
   
 }
+
+
+iframe {
+  allowTransparency="true";
+  scrolling="no";
+  frameborder="0";
+}

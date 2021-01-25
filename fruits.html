@@ -1,18 +1,33 @@
-
 <!DOCTYPE html>
 <html>
-<head>
-  <title>RESOURCES</title>
-   <link href="arena.css" type="text/css" rel="stylesheet" />
-  
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="style.css" type="text/css" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto"
+      rel="stylesheet"
+    />
+    <script src="/archive.js" defer></script>
+     <link href="arena.css" type="text/css" rel="stylesheet" />
+    <title>only make</title>
   </head>
+
   <body>
-    <h1>
-      Resources
-    </h1>
-  
-    <div id="orientation-blocks">
-    </div>
+    <header>  
+     
+      <h1>
+        Our projects:
+      </h1>
+      
+    </header>
+    <main>
+      <p>
+        If you'd like to share what you're working on, please add it to the <a href="https://www.are.na/there-is-only-make/fruits-ej_nr24q6pi" target="_blank">"fruits"</a> channel on are.na and it will automatically appear below.
+      </p>
+      <br>
+    
+    <div id="orientation-blocks"></div>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
@@ -20,27 +35,28 @@
       const orientationWrapper = document.getElementById("orientation-blocks");
 
       const axiosArena = axios.create({
-        baseURL: "https://api.are.na/v2/",
+        baseURL: "https://api.are.na/v2/"
       });
 
       let loading = document.createElement("div");
       loading.className = "loading";
-      loading.innerHTML = 'loading...';
+      loading.innerHTML = "loading...";
       orientationWrapper.appendChild(loading);
 
-      axiosArena.defaults.headers.Authorization = 'Bearer ---' ;
-      axiosArena.get("channels/creative-practice-resources?per=100").then(response => {
-        console.log(response);
-        if (response.data && response.data.contents.length > 1) {
-          orientationWrapper.removeChild(loading);
-          createOrientation(response.data.contents);
-        } else {
-
-        }
-      });
+      axiosArena.defaults.headers.Authorization = "Bearer ---";
+      axiosArena
+        .get("channels/fruits-ej_nr24q6pi?per=100")
+        .then(response => {
+          console.log(response);
+          if (response.data && response.data.contents.length > 1) {
+            orientationWrapper.removeChild(loading);
+            createOrientation(response.data.contents);
+          } else {
+          }
+        });
 
       function createOrientation(orientationData) {
-        for (let i=0; i<orientationData.length; i++) {
+        for (let i = 0; i < orientationData.length; i++) {
           //create block
           let block = document.createElement("div");
           block.className = "block";
@@ -69,7 +85,7 @@
           //create title
           if (orientationData[i].title) {
             const title = document.createElement("div");
-            title.className = "title";
+            title.className = "arenatitle";
             title.innerHTML = orientationData[i].title;
             block.appendChild(title);
           }
@@ -80,12 +96,15 @@
             text.className = "text";
             text.innerHTML = orientationData[i].content;
             block.appendChild(text);
+            
+            
           }
 
           orientationWrapper.appendChild(block);
         }
       }
-    </script>
-    
-</body>
+    </script> 
+        
+    </main>
+  </body>
 </html>
